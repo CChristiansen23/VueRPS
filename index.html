@@ -12,7 +12,8 @@
     <div class="small-6 columns">
       <h1 class="text-center">PLAYER</h1>
       <div class="wins">
-        <div class="wins text-center" style="background-color: green; margin: 0; color: white;">
+        <div class="wins text-center" style="background-color: green; margin: 0; color: white;" :style="{width: playerWins + '0%'}">
+          {{playerWins}}{{playerPoints()}}
 
         </div>
       </div>
@@ -20,30 +21,31 @@
     <div class="small-6 columns">
       <h1 class="text-center">COMPUTER</h1>
       <div class="wins">
-        <div class="wins text-center" style="background-color: green; margin: 0; color: white;">
-         
+        <div class="wins text-center" style="background-color: green; margin: 0; color: white;" :style="{width: computerWins + '0%'}">
+          {{computerWins}}{{computerPoints()}}
+
         </div>
       </div>
     </div>
   </section>
-  <section class="row controls">
+  <section class="row controls" v-show="gameStart">
     <div class="small-12 columns">
-      <button id="start-game">START NEW GAME</button>
+      <button id="start-game" v-on:click="gameStart = !gameStart">START NEW GAME</button>
     </div>
   </section>
-  <section class="row controls">
+  <section class="row controls" v-show="!gameStart">
     <div class="small-12 columns">
-      <button id="rock">ROCK</button>
-      <button id="paper">PAPER</button>
-      <button id="scissors">SCISSORS</button>
-      <button id="restart">RESTART</button>
+      <button @click="rock" :class="player" id="rock">ROCK</button>
+      <button @click="paper" :class="player" id="paper">PAPER</button>
+      <button @click="scissors" :class="player" id="scissors">SCISSORS</button>
+      <button @click="restart" :class="player" id="restart">RESTART</button>
     </div>
   </section>
   <section class="row log">
     <div class="small-12 columns">
       <ul>
-        <li>
-          
+        <li v-for="result in turns" :class="{'player-turn' : result.won, 'computer-turn' : result.lose, 'tie-turn': result.tied}">
+          {{result.text}}
         </li>
       </ul>
     </div>
