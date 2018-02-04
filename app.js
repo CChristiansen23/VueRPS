@@ -152,7 +152,7 @@ new Vue({
       }
     },
 
-    pStart: function () {
+    emptyBet: function () {
       var points = this.bets;
       var playerPoints = this.playerBets;
       if(points <= 0 && playerPoints <= 0){
@@ -160,7 +160,7 @@ new Vue({
       }
     },
 
-    start: function () {
+    betStart: function () {
       var points = this.bets;
       if(points <= 0){
         this.bets = 0;
