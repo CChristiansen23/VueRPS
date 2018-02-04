@@ -32,7 +32,18 @@
     <div class="small-12 columns">
       <button id="start-game" v-on:click="gameStart = !gameStart">START NEW GAME</button>
     </div>
+
+
   </section>
+  <section class="row controls">
+    Bets: {{bets}}
+    <button @click="bets++, playerBets--">Bet Amount: {{playerBets}}</button>
+    Rounds: {{round}} <div>Your Score: {{score}} <br> HighScore: {{highScore}}</div>
+
+  </section>
+  <div>{{pStart()}} {{start()}} {{rounds()}} </div>
+
+
   <section class="row controls" v-show="!gameStart">
     <div class="small-12 columns">
       <button @click="rock" :class="player" id="rock">ROCK</button>
