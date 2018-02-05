@@ -25,7 +25,7 @@ new Vue({
             text: 'Computer chose Paper | Paper beats Rock | Computer Wins!'
         });
         this.computerWins += 1;
-        this.bets--;
+        this.bets = this.bets - this.bets;
         this.round++
       }
       else if (computer === 3) {
@@ -34,8 +34,9 @@ new Vue({
             text: 'Computer chose Scissors | Rock beats Scissors | Player Wins!'
         });
         this.playerWins += 1;
-        this.score++;
-        this.playerBets++;
+        this.score += this.bets;
+        this.playerBets = this.playerBets + (this.bets * 2);
+        this.bets = 0;
         this.round++;
       }
       else {
@@ -44,7 +45,7 @@ new Vue({
             text: 'Computer chose Rock | Its a tie!'
         });
         this.round++;
-        this.bets -= 2;
+        this.bets = 0;
       }
     },
 
@@ -56,8 +57,8 @@ new Vue({
             text: 'Computer chose Scissors | Scissors beats Paper | Computer Wins!'
         });
         this.computerWins += 1;
-        this.bets--;
-        this.round++;
+        this.bets = this.bets - this.bets;
+        this.round++
       }
       else if (computer === 1) {
         this.turns.unshift({
@@ -65,8 +66,9 @@ new Vue({
             text: 'Computer chose Rock | Paper beats Rock | Player Wins!'
         });
         this.playerWins += 1;
-        this.score++;
-        this.playerBets++;
+        this.score += this.bets;
+        this.playerBets = this.playerBets + (this.bets * 2);
+        this.bets = 0;
         this.round++;
       }
       else {
@@ -75,7 +77,7 @@ new Vue({
             text: 'Computer chose Paper | Its a tie!'
         });
         this.round++;
-        this.bets -= 2;
+        this.bets = 0;
       }
     },
 
@@ -87,8 +89,8 @@ new Vue({
             text: 'Computer chose Rock | Rock beats Scissors | Computer Wins!'
         });
         this.computerWins += 1;
-        this.bets--;
-        this.round++;
+        this.bets = this.bets - this.bets;
+        this.round++
       }
       else if (computer === 2) {
         this.turns.unshift({
@@ -96,8 +98,9 @@ new Vue({
             text: 'Computer chose Paper | Scissors beats Paper | Player Wins!'
         });
         this.playerWins += 1;
-        this.score++;
-        this.playerBets++;
+        this.score += this.bets;
+        this.playerBets = this.playerBets + (this.bets * 2);
+        this.bets = 0;
         this.round++;
       }
       else {
@@ -106,7 +109,7 @@ new Vue({
             text: 'Computer chose Scissors | Its a tie!'
         });
         this.round++;
-        this.bets -= 2;
+        this.bets = 0;
       }
     },
 
@@ -143,14 +146,7 @@ new Vue({
       }
     },
 
-    totalScore: function () {
-      var newHigh = this.highScore;
-      var newScore = this.score;
-      if (newScore > newHigh){
-        newHigh = newScore;
-        return alert("You have beat your high score of: " + this.highScore);
-      }
-    },
+
 
     emptyBet: function () {
       var points = this.bets;
@@ -160,13 +156,13 @@ new Vue({
       }
     },
 
-    betStart: function () {
-      var points = this.bets;
-      if(points <= 0){
-        this.bets = 0;
-        return alert("Please enter your bet amount before playing");
-      }
-    },
+//    betStart: function () {
+//      var points = this.bets;
+//      if(points <= 0){
+//        this.bets = 0;
+//        return alert("Please enter your bet amount before playing");
+//      }
+//    },
 
     rounds: function(){
       var gameRounds = this.round;
@@ -174,9 +170,13 @@ new Vue({
         return alert("Game Over. Max rounds played");
         }
     }
-
-
-
-
+  },
+  computed: {
+      totalScore: function () {
+          if (this.score > this.highScore){
+              this.highScore = this.score;
+              alert('You have set the new high score!')
+          }
+      }
   }
 });

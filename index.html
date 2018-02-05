@@ -36,12 +36,12 @@
 
   </section>
   <section class="row controls">
-    Bets: {{bets}}
-    <button @click="bets++, playerBets--">Bet Amount: {{playerBets}}</button>
+    Bet Amount: {{bets}}
+    <button @click="bets++, playerBets--">Bets Available: {{playerBets}}</button>
     Rounds: {{round}} <div>Your Score: {{score}} <br> HighScore: {{highScore}}</div>
 
   </section>
-  <div>{{emptyBet()}} {{betStart()}} {{rounds()}} </div>
+  <div>{{emptyBet()}}  {{rounds()}} {{totalScore}}</div>
 
 
   <section class="row controls" v-show="!gameStart">
